@@ -1,4 +1,3 @@
-const timeBlocks = $(".container .row");
 const timeBlockArray = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 const past = $(".past");
 const present = $(".present");
@@ -26,30 +25,52 @@ const startTime = () => {
 
 $("document").ready(startTime);
 
-const UpdateTimeBlock = (event) => {
-  const hour = parseInt($(this).attr("data-mytime"));
-  if (hour < currentHour) {
-    container.remove(future);
-    container.append(past);
-    console.log(UpdateTimeBlock);
-  }
-  if (hour === currentHour) {
-    container.remove(past);
-    container.append(present);
-  }
-  if (hour > currentHour) {
-    container.remove(past);
-    container.append(future);
+const renderCalenderEvents = () => {
+  const plannerEvents = JSON.parse(localStorage.getItem("plannerEvents"));
+
+  if (plannerEvents !== null) {
+    const scheduledEvent = plannerEvents[timeBlocks];
+    console.log(plannerEvents, timeBlocks);
+  } else {
+    localStorage.setItem("plannerEvents", JSON.stringify({}));
   }
 };
 
-timeBlockArray.forEach(UpdateTimeBlock);
+const onReady = () => {
+  console.log("I am ready!");
 
-const saveText = () => {};
+  renderCalenderEvents();
+};
+
+$(document).ready(onReady);
+
+const timeBlocks = $(".container .row");
+
+const UpdateTimeBlock = () => {
+   
+  const hour = parseInt($(this).attr("data-mytime"));
+  if (hour < currentHour) {
+    $(this).find(textarea).removeClass("future").addClass("past");
+   
+  }
+  if (hour === currentHour) {
+    $(this).find(textarea).removeClass("past").addClass("present");
+    
+  }
+  if (hour > currentHour) {
+    $(this).find(textarea).removeClass("past").add(future);
+    console.log(UpdateTimeBlock);
+  }
+  
+};
+
+timeBlocks.each(UpdateTimeBlock);
+
+
 
 const addEventListenerOnBtn = (forEachBtn) => {
   forEachBtn.addEventListener("click, saveText");
   console.log(addEventListenerOnBtn);
 };
 
-buttonElement.forEach(addEventListenerOnBtn);
+//buttonElement.forEach(addEventListenerOnBtn);
