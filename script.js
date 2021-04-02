@@ -1,10 +1,11 @@
 const m = moment();
 const timeBlocks = $(".container .row");
 console.log(timeBlocks);
-const timeBlockArray = [9,10,11,12,13,14,15,16,17]; 
+const timeBlockArray = [9, 10, 11, 12, 13, 14, 15, 16, 17];
 const past = $(".past");
 const present = $(".present");
 const future = $(".future");
+const currentHour = moment().hour();
 
 //console.log(timeBlockArray);
 
@@ -27,13 +28,20 @@ const startTime = () => {
 $("document").ready(startTime());
 
 const UpdateTimeBlock = (event) => {
-
-    if (12 === getCurrentDateTime()) {
+  const hour = parseInt($(this).attr("data-mytime"));
+  if (hour < currentHour) {
+        container.remove(future);
+        container.append(past);
+        console.log(UpdateTimeBlock);
+  } else if (hour === currentHour) {
+      container.remove(past);
+      container.append(present);
+  } else if (hour > currentHour) {
+        container.remove(past);
+        container.append(future);
+  } else {
       
-    }
- //console.log(event)
-  //get current hour
+  }
 };
-
 
 timeBlockArray.forEach(UpdateTimeBlock);
