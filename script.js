@@ -27,27 +27,30 @@ $("document").ready(startTime);
 
 const renderCalenderEvents = () => {
   const plannerEvents = JSON.parse(localStorage.getItem("plannerEvents"));
+  //console.log("plannerEvents is:", plannerEvents);
 
   if (plannerEvents !== null) {
-   
-
-    const UpdateTimeBlock = () => {
+    const UpdateTimeBlock = function () {
       const hour = parseInt($(this).attr("data-mytime"));
+      //console.log("currentHour: ", currentHour);
+      //console.log(hour);
 
       if (hour === currentHour) {
-        $(this).find(textarea).removeClass("past").addClass("present");
-        console.log("present");
+        $(this).find("textarea").removeClass("past").addClass("present");
       }
       if (hour > currentHour) {
-        $(this).find(textarea).removeClass("past").add(future);
+        $(this).find("textarea").removeClass("past").add(future);
       }
-       const scheduledEvent = plannerEvents[timeBlocks];
-       $(this).text(scheduledEvent);
+      const scheduledEvent = plannerEvents[timeBlocks];
+      $(this).text(scheduledEvent);
     };
 
     timeBlocks.each(UpdateTimeBlock);
   } else {
-    localStorage.setItem("plannerEvents", JSON.stringify({11:"Event that already happened", 12:"Current hour"}));
+    localStorage.setItem(
+      "plannerEvents",
+      JSON.stringify({ 11: "Event that already happened", 12: "Current hour" })
+    );
   }
 };
 
@@ -58,7 +61,6 @@ const onReady = () => {
 };
 
 $(document).ready(onReady);
-
 
 const addEventListenerOnBtn = (forEachBtn) => {
   forEachBtn.addEventListener("click, saveText");
