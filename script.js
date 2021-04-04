@@ -32,25 +32,21 @@ const renderCalenderEvents = () => {
   if (plannerEvents !== null) {
     const UpdateTimeBlock = function () {
       const hour = parseInt($(this).attr("data-mytime"));
-      //console.log("currentHour: ", currentHour);
-      //console.log(hour);
+      console.log($(this));
 
       if (hour === currentHour) {
         $(this).find("textarea").removeClass("past").addClass("present");
       }
       if (hour > currentHour) {
-        $(this).find("textarea").removeClass("past").add(future);
+        $(this).find("textarea").removeClass("past").addClass("future");
       }
       const scheduledEvent = plannerEvents[timeBlocks];
-        $(this).text(scheduledEvent);
+      $(this).text(scheduledEvent);
     };
 
     timeBlocks.each(UpdateTimeBlock);
   } else {
-    localStorage.setItem(
-      "plannerEvents",
-      JSON.stringify({})
-    );
+    localStorage.setItem("plannerEvents", JSON.stringify({}));
   }
 };
 
@@ -64,23 +60,17 @@ const onclick = function (event) {
     const key = target.attr("id");
     const value = target.parent().find("textarea").val();
 
-    plannerEvents[key] = value;
+    const newText = { ...plannerEvents, [key]: value };
 
-    console.log(plannerEvents);
-
-    localStorage.setItem("plannerEvents", JSON.stringify({}));
-
-  } 
-  
+    localStorage.setItem("plannerEvents", JSON.stringify(newText));
+  }
 };
 
 const onReady = () => {
-//set event listener on container
-$(".container").click(onclick)
+  //set event listener on container
+  $(".container").click(onclick);
 
   renderCalenderEvents();
 };
 
 $(document).ready(onReady);
-
-
