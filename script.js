@@ -1,7 +1,7 @@
 const past = $(".past");
 const present = $(".present");
 const future = $(".future");
-const buttonElement = $(".saveBtn");
+const buttonEl = $(".saveBtn");
 const currentHour = moment().hour();
 const timeBlocks = $(".container .row");
 
@@ -42,19 +42,39 @@ const renderCalenderEvents = () => {
         $(this).find("textarea").removeClass("past").add(future);
       }
       const scheduledEvent = plannerEvents[timeBlocks];
-      $(this).text(scheduledEvent);
+        $(this).text(scheduledEvent);
     };
 
     timeBlocks.each(UpdateTimeBlock);
   } else {
     localStorage.setItem(
       "plannerEvents",
-      JSON.stringify({ 11: "Event that already happened", 12: "Current hour" })
+      JSON.stringify({})
     );
   }
 };
 
+const onclick = function (event) {
+  const plannerEvents = JSON.parse(localStorage.getItem("plannerEvents"));
+
+  const target = $(event.target);
+  const currentTarget = $(event.currentTarget);
+
+  if (target.is("button")) {
+    const key = target.attr("id");
+    const value = target.parent().find("textarea").val();
+
+    plannerEvents[key] = value;
+
+    //console.log(key, value);
+    //console.log(plannerEvents);
+  }
+  
+};
+
 const onReady = () => {
+//set event listener on container
+$(".container").click(onclick)
   //console.log("I am ready!");
 
   renderCalenderEvents();
@@ -62,9 +82,6 @@ const onReady = () => {
 
 $(document).ready(onReady);
 
-const addEventListenerOnBtn = (forEachBtn) => {
-  forEachBtn.addEventListener("click, saveText");
-  console.log(addEventListenerOnBtn);
-};
+
 
 //buttonElement.forEach(addEventListenerOnBtn);
