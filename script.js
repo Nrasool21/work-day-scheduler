@@ -66,16 +66,17 @@ const onclick = function (event) {
 
     plannerEvents[key] = value;
 
-    //console.log(key, value);
-    //console.log(plannerEvents);
-  }
+    console.log(plannerEvents);
+
+    localStorage.setItem("plannerEvents", JSON.stringify({}));
+
+  } 
   
 };
 
 const onReady = () => {
 //set event listener on container
 $(".container").click(onclick)
-  //console.log("I am ready!");
 
   renderCalenderEvents();
 };
@@ -83,5 +84,3 @@ $(".container").click(onclick)
 $(document).ready(onReady);
 
 
-
-//buttonElement.forEach(addEventListenerOnBtn);
