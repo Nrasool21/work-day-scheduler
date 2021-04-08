@@ -32,7 +32,7 @@ const renderCalenderEvents = () => {
   if (plannerEvents !== null) {
     const UpdateTimeBlock = function () {
       const hour = parseInt($(this).attr("data-mytime"));
-      console.log($(this));
+      console.log($(this)); 
 
       if (hour === currentHour) {
         $(this).find("textarea").removeClass("past").addClass("present");
@@ -40,8 +40,8 @@ const renderCalenderEvents = () => {
       if (hour > currentHour) {
         $(this).find("textarea").removeClass("past").addClass("future");
       }
-      const scheduledEvent = plannerEvents[timeBlocks];
-      $(this).text(scheduledEvent);
+      const scheduledEvent = plannerEvents[hour];
+      $(this).find("textarea").val(scheduledEvent);
     };
 
     timeBlocks.each(UpdateTimeBlock);
