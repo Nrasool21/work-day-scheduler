@@ -5,8 +5,6 @@ const buttonEl = $(".saveBtn");
 const currentHour = moment().hour();
 const timeBlocks = $(".container .row");
 
-//console.log(timeBlockArray);
-
 const getCurrentDateTime = () => {
   //get current date and time
   const dateTime = moment().format("dddd MMM Do YYYY, HH:mm:ss");
@@ -27,19 +25,19 @@ $("document").ready(startTime);
 
 const renderCalenderEvents = () => {
   const plannerEvents = JSON.parse(localStorage.getItem("plannerEvents"));
-  //console.log("plannerEvents is:", plannerEvents);
+  
 
   if (plannerEvents !== null) {
     const UpdateTimeBlock = function () {
-      const hour = parseInt($(this).attr("data-mytime"));
-      console.log($(this)); 
-
+      const hour = parseInt($(this).attr("data-mytime")); 
+      //control the textarea coloring with time
       if (hour === currentHour) {
         $(this).find("textarea").removeClass("past").addClass("present");
       }
       if (hour > currentHour) {
         $(this).find("textarea").removeClass("past").addClass("future");
       }
+      //populating textarea with text dynamically
       const scheduledEvent = plannerEvents[hour];
       $(this).find("textarea").val(scheduledEvent);
     };
