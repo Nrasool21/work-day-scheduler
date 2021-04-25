@@ -55,11 +55,11 @@ const onclick = function (event) {
 };
 
 const onReady = () => {
-  $(".container").click(onclick);
-
   startTime();
 
   renderCalenderEvents();
+
+  $(".container").click(onclick);
 };
 
 $(document).ready(onReady);
