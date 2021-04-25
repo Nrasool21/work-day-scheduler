@@ -2,8 +2,6 @@ const past = $(".past");
 const present = $(".present");
 const future = $(".future");
 const buttonEl = $(".saveBtn");
-const currentHour = moment().hour();
-const timeBlocks = $(".container .row");
 
 const getCurrentDateTime = () => {
   //get current date and time
@@ -25,24 +23,25 @@ $("document").ready(startTime);
 
 const renderCalenderEvents = () => {
   const plannerEvents = JSON.parse(localStorage.getItem("plannerEvents"));
-  
 
   if (plannerEvents !== null) {
-    const UpdateTimeBlock = function () {
-      const hour = parseInt($(this).attr("data-mytime")); 
-      //control the textarea coloring with time
+    const currentHour = moment().hour();
+
+    const updateTimeBlock = function () {
+      const hour = parseInt($(this).attr("data-mytime"));
+
       if (hour === currentHour) {
         $(this).find("textarea").removeClass("past").addClass("present");
       }
       if (hour > currentHour) {
         $(this).find("textarea").removeClass("past").addClass("future");
       }
-      //populating textarea with text dynamically
+
       const scheduledEvent = plannerEvents[hour];
       $(this).find("textarea").val(scheduledEvent);
     };
 
-    timeBlocks.each(UpdateTimeBlock);
+    $(".container .row").each(updateTimeBlock);
   } else {
     localStorage.setItem("plannerEvents", JSON.stringify({}));
   }
@@ -65,7 +64,6 @@ const onclick = function (event) {
 };
 
 const onReady = () => {
-  //set event listener on container
   $(".container").click(onclick);
 
   renderCalenderEvents();
