@@ -1,8 +1,3 @@
-const past = $(".past");
-const present = $(".present");
-const future = $(".future");
-const buttonEl = $(".saveBtn");
-
 const startTime = () => {
   const renderCurrentDateTime = () => {
     const currentDateTime = moment().format("dddd MMM Do YYYY, HH:mm:ss");
