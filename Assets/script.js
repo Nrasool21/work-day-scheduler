@@ -11,15 +11,13 @@ const getCurrentDateTime = () => {
 };
 
 const startTime = () => {
-  const callBack = () => {
+  const setCurrentDateTime = () => {
     const renderDateTime = getCurrentDateTime();
     $("#currentDay").text(renderDateTime);
   };
 
-  setInterval(callBack, 1000);
+  setInterval(setCurrentDateTime, 1000);
 };
-
-$("document").ready(startTime);
 
 const renderCalenderEvents = () => {
   const plannerEvents = JSON.parse(localStorage.getItem("plannerEvents"));
@@ -66,6 +64,8 @@ const onClick = function (event) {
 const onReady = () => {
   //set event listener on container
   $(".container").click(onClick);
+
+  startTime(); 
 
   renderCalenderEvents();
 };
