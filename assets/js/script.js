@@ -38,19 +38,18 @@ const renderCalenderEvents = () => {
   }
 };
 
-const onclick = function (event) {
+const onClick = function (event) {
   const plannerEvents = JSON.parse(localStorage.getItem("plannerEvents"));
 
   const target = $(event.target);
-  const currentTarget = $(event.currentTarget);
 
   if (target.is("button")) {
     const key = target.attr("id");
     const value = target.parent().find("textarea").val();
 
-    const newText = { ...plannerEvents, [key]: value };
+    const newPlannerEvents = { ...plannerEvents, [key]: value };
 
-    localStorage.setItem("plannerEvents", JSON.stringify(newText));
+    localStorage.setItem("plannerEvents", JSON.stringify(newPlannerEvents));
   }
 };
 
@@ -59,7 +58,7 @@ const onReady = () => {
 
   renderCalenderEvents();
 
-  $(".container").click(onclick);
+  $(".container").click(onClick);
 };
 
 $(document).ready(onReady);
