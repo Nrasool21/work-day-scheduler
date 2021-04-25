@@ -3,20 +3,13 @@ const present = $(".present");
 const future = $(".future");
 const buttonEl = $(".saveBtn");
 
-const getCurrentDateTime = () => {
-  //get current date and time
-  const dateTime = moment().format("dddd MMM Do YYYY, HH:mm:ss");
-
-  return dateTime;
-};
-
 const startTime = () => {
-  const callBack = () => {
-    const renderDateTime = getCurrentDateTime();
-    $("#currentDay").text(renderDateTime);
+  const renderCurrentDateTime = () => {
+    const currentDateTime = moment().format("dddd MMM Do YYYY, HH:mm:ss");
+    $("#currentDay").text(currentDateTime);
   };
 
-  setInterval(callBack, 1000);
+  setInterval(renderCurrentDateTime, 1000);
 };
 
 const renderCalenderEvents = () => {
