@@ -28,7 +28,7 @@ const renderCalenderEvents = () => {
   
 
   if (plannerEvents !== null) {
-    const UpdateTimeBlock = function () {
+    const updateTimeBlock = function () {
       const hour = parseInt($(this).attr("data-mytime")); 
       //control the textarea coloring with time
       if (hour === currentHour) {
@@ -42,13 +42,13 @@ const renderCalenderEvents = () => {
       $(this).find("textarea").val(scheduledEvent);
     };
 
-    timeBlocks.each(UpdateTimeBlock);
+    timeBlocks.each(updateTimeBlock);
   } else {
     localStorage.setItem("plannerEvents", JSON.stringify({}));
   }
 };
 
-const onclick = function (event) {
+const onClick = function (event) {
   const plannerEvents = JSON.parse(localStorage.getItem("plannerEvents"));
 
   const target = $(event.target);
@@ -66,7 +66,7 @@ const onclick = function (event) {
 
 const onReady = () => {
   //set event listener on container
-  $(".container").click(onclick);
+  $(".container").click(onClick);
 
   renderCalenderEvents();
 };
