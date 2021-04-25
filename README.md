@@ -20,7 +20,7 @@ https://nrasool21.github.io/work-day-scheduler/
 
 ## Screenshots
 
-![work-day-scheduler](./Assets/Screenshot-work-day-scheduler.png)
+![work-day-scheduler](./assets/images/screenshot-work-day-scheduler.png)
 
 
 
