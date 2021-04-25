@@ -19,8 +19,6 @@ const startTime = () => {
   setInterval(callBack, 1000);
 };
 
-$("document").ready(startTime);
-
 const renderCalenderEvents = () => {
   const plannerEvents = JSON.parse(localStorage.getItem("plannerEvents"));
 
@@ -65,6 +63,8 @@ const onclick = function (event) {
 
 const onReady = () => {
   $(".container").click(onclick);
+
+  startTime();
 
   renderCalenderEvents();
 };
